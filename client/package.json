@@ -1,5 +1,4 @@
 {
-  "homepage": "https://GabrieleRomano98.github.io/ITwebapp",
   "name": "react-scores",
   "version": "0.1.0",
   "private": true,
@@ -21,8 +20,6 @@
     "web-vitals": "^1.1.1"
   },
   "scripts": {
-    "predeploy": "npm i && npm run build",
-    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
