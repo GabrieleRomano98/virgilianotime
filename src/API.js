@@ -2,7 +2,7 @@
  * All the API calls
  */
 
-const BASEURL = '/api';
+const BASEURL = 'https://tranquil-earth-17406.herokuapp.com/api';
 
 // Task API //
 
@@ -42,7 +42,7 @@ function inviaColli(colli, lat, lng, timestamp, stato) {
 
 // User API //
 
-async function logIn(credentials) {
+async function logIn(credentials) {console.log(22);
   let response = await fetch('/api/sessions', {
     method: 'POST',
     headers: {
