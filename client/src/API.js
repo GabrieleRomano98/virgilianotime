@@ -8,8 +8,6 @@ const BASEURL = '/api';
 
 async function getColli() {
   // call: GET /api/operatore/colli
-  const b = await fetch('https://tranquil-earth-17406.herokuapp.com/api/prova');
-  console.log(b)
   const response = await fetch(BASEURL + '/operatore/colli');
   const tasksJson = await response.json();
   if (response.ok) {
