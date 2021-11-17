@@ -1,0 +1,105 @@
+.App {
+  margin-top: 1em;
+}
+
+.bi-person-circle{
+  color:honeydew;
+}
+
+.rowstyle{
+  min-height: 100vh;
+}
+
+.link{
+  color: rgba(92, 91, 91, 0.774); 
+  font-weight: bold;
+}
+
+.selected{
+  background-color: rgb(78, 78, 78);
+}
+
+.invisible-icon {
+  visibility: hidden;
+}
+
+.btn-circle {
+  position: fixed;
+  bottom: 10px;
+  right: 30px;
+  height: 45px;
+  width: 45px;
+}
+
+.logo {
+  position: relative;
+  top: 70px;
+  left: 70px;
+}
+
+.cns-button {
+  position: relative;
+  background-color: rgb(78, 78, 78);
+  top: 40px;
+  height: 150px;
+  width: 330px;
+  font-size: xxx-large;
+  font-family: cursive;
+}
+
+.res-button {
+  position: relative;
+  background-color: rgb(78, 78, 78);
+  top: 50px;
+  height: 150px;
+  width: 330px;
+  font-size: xxx-large;
+  font-family: cursive;
+}
+
+.pos-button {
+  position: relative;
+  top: 10px;
+  width: 300px;
+  background-color: rgb(78, 78, 78);
+  font-size: x-large;
+  font-family: cursive;
+}
+
+.prev-button {
+  position: relative;
+  bottom: 7px;
+  right: 130px;
+  background-color: rgb(78, 78, 78);
+  font-family: cursive;
+  font-size: large;
+}
+
+.next-button {
+  position: relative;
+  bottom: 7px;
+  left: 130px;
+  background-color: rgb(78, 78, 78);
+  font-family: cursive;
+  font-size: large;
+}
+
+.scan-button {
+  position: relative;
+  bottom: 360px;
+  font-size: large;
+  height: 100px;
+  width: 280px;
+  font-family: cursive;
+}
+
+.scan-table {
+  position: relative;
+  bottom: 305px;
+  font-size: x-large;
+  font-family: cursive;
+}
+
+.mycolor:hover{
+  color: rgb(0, 0, 0) !important;
+}
