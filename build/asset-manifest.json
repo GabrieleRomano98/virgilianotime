@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/ITtransportFE/static/css/main.17ec042f.chunk.css",
+    "main.js": "/ITtransportFE/static/js/main.0dfd6dd9.chunk.js",
+    "main.js.map": "/ITtransportFE/static/js/main.0dfd6dd9.chunk.js.map",
+    "runtime-main.js": "/ITtransportFE/static/js/runtime-main.16582b68.js",
+    "runtime-main.js.map": "/ITtransportFE/static/js/runtime-main.16582b68.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/ITtransportFE/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.60c0c275.chunk.js": "/ITtransportFE/static/js/2.60c0c275.chunk.js",
+    "static/js/2.60c0c275.chunk.js.map": "/ITtransportFE/static/js/2.60c0c275.chunk.js.map",
+    "static/js/3.ab92cadb.chunk.js": "/ITtransportFE/static/js/3.ab92cadb.chunk.js",
+    "static/js/3.ab92cadb.chunk.js.map": "/ITtransportFE/static/js/3.ab92cadb.chunk.js.map",
+    "index.html": "/ITtransportFE/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/ITtransportFE/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.17ec042f.chunk.css.map": "/ITtransportFE/static/css/main.17ec042f.chunk.css.map",
+    "static/js/2.60c0c275.chunk.js.LICENSE.txt": "/ITtransportFE/static/js/2.60c0c275.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.16582b68.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.60c0c275.chunk.js",
+    "static/css/main.17ec042f.chunk.css",
+    "static/js/main.0dfd6dd9.chunk.js"
+  ]
+}

@@ -8,6 +8,8 @@ const BASEURL = 'https://tranquil-earth-17406.herokuapp.com/api';
 
 async function getColli() {
   // call: GET /api/operatore/colli
+  const b = await fetch('https://tranquil-earth-17406.herokuapp.com/api/prova');
+  console.log(b)
   const response = await fetch(BASEURL + '/operatore/colli');
   const tasksJson = await response.json();
   if (response.ok) {
@@ -42,8 +44,8 @@ function inviaColli(colli, lat, lng, timestamp, stato) {
 
 // User API //
 
-async function logIn(credentials) {console.log(22);
-  let response = await fetch('/api/sessions', {
+async function logIn(credentials) {console.log(23);
+  let response = await fetch(BASEURL + '/sessions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -66,7 +68,7 @@ async function logIn(credentials) {console.log(22);
 }
 
 async function logOut() {
-  await fetch('/api/sessions/current', { method: 'DELETE' });
+  await fetch(BASEURL + '/sessions/current', { method: 'DELETE' });
 }
 
 async function getUserInfo() {
