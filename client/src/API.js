@@ -2,7 +2,7 @@
  * All the API calls
  */
 
-const BASEURL = 'https://tranquil-earth-17406.herokuapp.com/api';
+const BASEURL = '/api';
 
 // Task API //
 

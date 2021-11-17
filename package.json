@@ -1,52 +1,27 @@
 {
-  "homepage": "https://GabrieleRomano98.github.io/ITwebapp",
-  "name": "react-scores",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "bootstrap": "^4.6.0",
-    "dayjs": "^1.10.4",
-    "quagga": "^0.12.1",
-    "react": "^17.0.2",
-    "react-barcode-reader": "0.0.2",
-    "react-bootstrap": "^1.5.2",
-    "react-dom": "^17.0.2",
-    "react-google-maps": "^9.4.5",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "web-vitals": "^1.1.1"
-  },
+  "name": "react-scores-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
   "scripts": {
-    "predeploy": "npm i && npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "proxy": "https://tranquil-earth-17406.herokuapp.com",
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "author": "Web Applications I, Applicazioni Web I",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "dayjs": "^1.10.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "express-validator": "^6.10.1",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "sqlite3": "^5.0.2"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "gh-pages": "^3.2.3"
+  "engine": {
+    "node": "14.16.0"
   }
 }
