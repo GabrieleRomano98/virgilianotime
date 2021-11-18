@@ -25,6 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://tranquil-earth-17406.herokuapp.com",
   "eslintConfig": {
     "extends": [
       "react-app",
