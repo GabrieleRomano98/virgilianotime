@@ -49,7 +49,7 @@ const port = process.env.PORT || 3001;
 // set-up the middlewares
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(cors());
+app.use(express.static("./client/build"));
 
 // custom middleware: check if a given request is coming from an authenticated user
 const isLoggedIn = (req, res, next) => {
@@ -159,7 +159,7 @@ app.get('/api/sessions/current', (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  res.sendFile(path.join('./client', 'build', 'index.html'));
  });
 
 /*** Other express-related instructions ***/
