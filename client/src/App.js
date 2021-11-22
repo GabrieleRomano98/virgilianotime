@@ -15,7 +15,7 @@ const arrayRuoli = [ 'operatore', 'magazziniere', 'autista' ];
 
 function App() {
   const [show, setShow] = useState(true);
-  const [colli, setColli] = useState(['1', '2', '3', '4']);
+  const [colli, setColli] = useState([]);
   const [stato, setStato] = useState();
   const [map, setMap] = useState(false);
   const [loading, setLoading] = useState(true);

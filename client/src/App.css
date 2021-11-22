@@ -34,7 +34,6 @@
 .logo {
   position: relative;
   top: 70px;
-  left: 70px;
 }
 
 .cns-button {
@@ -66,19 +65,7 @@
   font-family: cursive;
 }
 
-.prev-button {
-  position: relative;
-  bottom: 7px;
-  right: 130px;
-  background-color: rgb(78, 78, 78);
-  font-family: cursive;
-  font-size: large;
-}
-
-.next-button {
-  position: relative;
-  bottom: 7px;
-  left: 130px;
+.nav-button {
   background-color: rgb(78, 78, 78);
   font-family: cursive;
   font-size: large;

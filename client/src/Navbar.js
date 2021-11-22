@@ -9,7 +9,7 @@ return(
     
     <Col>
       <Navbar.Brand>
-        <div style={{fontSize: "xx-large", fontFamily: "cursive"}}>I&T Tracking</div>
+        <div style={{fontSize: "xx-large", fontFamily: "cursive"}}>I&T</div>
       </Navbar.Brand>
     </Col>
     
