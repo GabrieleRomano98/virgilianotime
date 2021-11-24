@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap');
+
 .App {
   margin-top: 1em;
 }
@@ -24,7 +26,7 @@
 }
 
 .Title {
-  font-family: cursive;
+  font-family: 'Mochiy Pop P One', sans-serif;
   height:max-content;
   background-color:rgb(74, 169, 108);
 }
@@ -38,5 +40,12 @@
   text-align: center; 
   font-size: x-large; 
   color: white;
+  background-color:rgb(109, 216, 111);
+}
+
+.error-box {
+  text-align: center; 
+  font-size: x-large; 
+  color: red;
   background-color:rgb(109, 216, 111);
 }

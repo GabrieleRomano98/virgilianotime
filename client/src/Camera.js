@@ -15,6 +15,7 @@ const Arrivo = props => {
     const [message, setMessage] = React.useState(false);
     const [start, setStart] = React.useState(false);
     const [loading, setLoading] = React.useState(false);
+    const [errMsg, setErrMsg] = React.useState('');
 
     let videoRef = React.createRef();
 
@@ -37,7 +38,7 @@ const Arrivo = props => {
             imgScore /= (0.1 * imageData.height * imageData.width/15);
             if(bool) imgScore = prvScore;
         }
-        catch (e){console.log(e)}console.log(imgScore, prvScore)
+        catch (e){console.log(e)}
 
         if(prvScore > 10 && imgScore > 10 && (imgScore-prvScore > 5 || prvScore-imgScore > 5)){
             let arrTime = dayjs();
@@ -64,9 +65,31 @@ const Arrivo = props => {
     };
 
     const verificaSessione = async () => {
-        const res = await API.getSession(sessione);
+        if(!sessione) {
+            setMessage(true);
+            setErrMsg('Inserisci il codice sessione!');
+        }
+        if(sessione.toLowerCase() === 'freddy'){
+            setMessage(true);
+            setErrMsg("Chi l'avrebbe mai detto!");
+            return;
+        }
+        if(sessione.toLowerCase() === 'davide'){
+            setMessage(true);
+            setErrMsg("Porcu diavulu mortu!");
+            return;
+        }
+        if(sessione.toLowerCase() === 'zack'){
+            setMessage(true);
+            setErrMsg("È lento!");
+            return;
+        }
+        const res = false//await API.getSession(sessione);
         if(res) setTrovata(true);
-        else setMessage(true);
+        else {
+            setMessage(true);
+            setErrMsg('Codice sessione errato, riprova!');
+        }
     }
 
     const registrazione = () => {
@@ -86,7 +109,7 @@ const Arrivo = props => {
     return(
         !trovata ? <>
             <div className="mb-4 text-box">Inserisci il codice sessione generato alla partenza</div>
-            {message && <div className="mb-4 text-box">Codice sessione errato, riprova!</div>}
+            {message && <div className="mb-4 error-box">{errMsg}</div>}
             <Form.Control className="mb-3" placeholder={"Codice sessione"} onChange={event => setSessione(event.target.value)}/>
             <Button className="general-button mb-4 ml-2" size="lg" onClick={verificaSessione}>Invia</Button>
             <Button className="fixed-bottom general-button mb-4 ml-2" size="lg" onClick={indietro}>{FrecciaSx} Indietro</Button>
