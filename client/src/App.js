@@ -1,170 +1,78 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import dayjs from "dayjs"
+import { FaLeaf } from "react-icons/fa";
+import { BiRun } from "react-icons/bi";
+import { GiFinishLine, GiPistolGun } from "react-icons/gi";
 import './App.css';
-import { Nav, Col, Container, Row, Alert } from 'react-bootstrap';
-import FormConsegna from './FormConsegna.js';
-import ComponenteOperatore from './vistaOperatore.js';
-import MapComponent from './mapButton.js';
-import NavBar from './Navbar.js';
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom';
+import { Button, Container, Row } from 'react-bootstrap';
+import {FrecciaSx } from './icons'
+import { useState } from 'react';
 import API from './API';
-import { LoginForm } from './LoginComponents';
-
-const arrayRuoli = [ 'operatore', 'magazziniere', 'autista' ];
-//const arrayStati = ['in magazzino', 'in consegna', 'consegnato', 'respinto'];
+import Arrivo from './Camera.js';
+import logo from './logo.png'
 
 function App() {
-  const [show, setShow] = useState(true);
-  const [colli, setColli] = useState([]);
-  const [stato, setStato] = useState();
-  const [map, setMap] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState('');
-  const [ruolo, setRuolo] = useState(true);
-  const [loggedIn, setLoggedIn] = useState(false); // at the beginning, no user is logged in
+	const [show, setShow] = useState('Home');
+	const [risultato, setRisultato] = useState();
+	const [partito, setPartito] = useState(false);
+	const [code, setCode] = useState();
 
-  useEffect(()=> {
-    const checkAuth = async() => {
-      try {
-        // here you have the user info, if already logged in
-        // TODO: store them somewhere and use them, if needed
-        const user = await API.getUserInfo();
-        setLoggedIn(true);
-        setRuolo(user.ruolo);
-      } catch(err) {
-        console.error(err.error);
-      }
-    };
-    checkAuth();
-  }, []);
+	const partenza = () => {
+		setShow('Partenza'); 
+		const newCode = Math.floor(Math.random(1)*10000);
+		setCode(newCode);
+		API.addSession(newCode);
+	}
 
+	const milliseconds = day => 60*60*1000*day.get('hour') + 60*1000*day.get('minute') + 1000*day.get('second') + day.get('millisecond');
 
-  useEffect(()=> {
-    const getColli = async () => {console.log(ruolo);
-      if(loggedIn && ruolo === 0) {
-        const colli = await API.getColli();
-        setColli(colli);
-      }
-    };
-    getColli()
-      .catch(err => {
-        setMessage({msg: "Impossibile caricare i dati! Ripropva più tardi...", type: 'danger'});
-        console.error(err);
-      });
-  }, [loggedIn, ruolo]);
+  	return (
+		<Container fluid className='Title'>
 
-  const handleErrors = (err) => {
-    if(err.errors)
-      setMessage({msg: err.errors[0].msg + ': ' + err.errors[0].param, type: 'danger'});
-    else
-      setMessage({msg: err.error, type: 'danger'});
-  }
+			<Row className="bg-success justify-content-center">
+				<h1>Virgiliano Time <FaLeaf/></h1>
+			</Row>
+			
+			{ show === 'Home' ? <>
 
+				<Row className="justify-content-center m-4">
+					<Button className="main-button general-button" onClick={partenza}>Partenza <BiRun/></Button>
+				</Row>
+				<Row className="justify-content-center">
+					<Button className="main-button general-button" onClick={() => setShow('Arrivo')}>Arrivo <GiFinishLine/></Button>
+				</Row></>
 
-  const doLogIn = async (credentials) => {
-    try {
-      const user = await API.logIn(credentials);
-      setLoggedIn(true);
-      setMessage({msg: `Welcome, ${user.name}!`, type: 'success'});
-      setRuolo(user.ruolo);
-    } catch(err) {
-      setMessage({msg: 'Incorrect uername and/or password', type: 'danger'});
-    }
-  }
+			: show === 'Arrivo' ?
 
-  const doLogOut = async () => {
-    await API.logOut();
-    // clean up everything
-    setLoggedIn(false);
-    setRuolo(undefined);
-    setColli([]);
-  }
+				<Row className="justify-content-center m-5">
+					<Arrivo setRisultato={setRisultato} setShow={setShow}/>
+				</Row>
 
-  return (
-    <Router>
-      <NavBar logged={loggedIn} logout={doLogOut} />
-      <Container sm="auto" className="App">
-        <Switch>
+			: show === 'Partenza' ?
 
-          <Row sm="auto" className="rowstyle">
-            <Col sm="auto" md="10" lg="10">
-              {message && <Alert variant={message.type} onClose={() => setMessage('')} dismissible>{message.msg}</Alert>}
-              
-              {!loggedIn ? <Redirect to="/login" /> :
-                !loading ? <span>🕗 Please wait, loading... 🕗</span> :
-                <Nav className = "px-md-4">
+				<Row className="justify-content-center m-5">
+					<div className="mb-4 text-box">Codice sessione da inserire all'arrivo: {code}</div>
+					{!partito ? <Button className="main-button general-button" onClick={() => {API.addTime(milliseconds(dayjs()), code); setPartito(true);}}>Start <GiPistolGun/></Button>
+					: <div className="mb-4 text-box">Partito! Il risultato sarà visibile all'arivo</div>}
+					<Button className="fixed-bottom general-button mb-4 ml-2" size="lg" onClick={() => {setShow('Home'); setPartito(false);}}>{FrecciaSx} Indietro</Button>
+				</Row>
+			
+			:
 
-                  <Route exact path="/autista" render={() =>
-                    !map ? 
-                      <FormConsegna bDes1={'Consegnato'} bDes2={'Respinto'} bVal1={2} bVal2={3} show={show} setShow={setShow} colli={colli} setColli={setColli} setMap={setMap} setStato={setStato}  setMessage={setMessage}/>
-                    :
-                      <MapComponent 
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `400px`, width: '600px' }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        setMap={setMap}
-                        inviaColli={API.inviaColli}
-                        colli={colli}
-                        stato={stato}
-                        setColli={setColli}
-                        setShow={setShow}
-                        setMessage={setMessage}
-                      />
-                  } />
+			<Row className="justify-content-center m-5">
+				<div className="mb-4 text-box">Risultato: {risultato}"</div>
+				<Button className="fixed-bottom general-button mb-4 ml-2" size="lg" onClick={() => setShow('Home')}>{FrecciaSx} Indietro</Button>
+			</Row>
 
-                  <Route exact path="/magazziniere" render={() =>
-                    !map ? 
-                      <FormConsegna bDes1={'In magazzino'} bDes2={'In consegna'} bVal1={0} bVal2={1} show={show} setShow={setShow} colli={colli} setColli={setColli} setMap={setMap} setStato={setStato} setMessage={setMessage}/>
-                    :
-                      <MapComponent 
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{ height: `100%` }} />}
-                        containerElement={<div style={{ height: `400px`, width: '600px' }} />}
-                        mapElement={<div style={{ height: `100%` }} />}
-                        setMap={setMap}
-                        inviaColli={API.inviaColli}
-                        colli={colli}
-                        stato={stato}
-                        setColli={setColli}
-                        setShow={setShow}
-                        setMessage={setMessage}
-                      />
-                  } />
+			}
 
-                  <Route exact path="/operatore" render={() =>
-                    <ComponenteOperatore 
-                      googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                      loadingElement={<div style={{ height: `100%` }} />}
-                      containerElement={<div style={{ height: `400px`, width: '100%' }} />}
-                      mapElement={<div style={{ height: `100%` }} />}
-                      inviaColli={API.inviaColli}
-                      colli={colli}
-                      stato={stato}
-                      setColli={setColli}
-                      setMessage={setMessage}
-                      />
-                  }/>
+			{ show === 'Home' && 
+				<Row className="justify-content-center">
+					<img className="logo" src={logo} alt={"logo"}/>
+				</Row>
+			}
 
-                  <Route exact path="/undefined" render={() =>
-                    {!ruolo && <Redirect to="/login"/>}
-                  }/>
-
-                </Nav>
-
-              }
-
-              <Route path="/login" render={() => 
-                <>{loggedIn && arrayRuoli[ruolo]!==undefined ? <Redirect to = {'/' + arrayRuoli[ruolo]} /> : <LoginForm login={doLogIn} />}</>
-              }/>
-
-            </Col>
-          </Row>
-
-        </Switch>
-
-      </Container>
-    </Router>
+		</Container>
   );
 }
 

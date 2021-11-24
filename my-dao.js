@@ -1,48 +1,62 @@
 'use strict';
 /* Data Access Object (DAO) module for accessing courses and exams */
 
-const dayjs = require('dayjs');
-/* Data Access Object (DAO) module for accessing tasks and exams */
-
 const sqlite = require('sqlite3');
 
 // open the database
 const db = require('./db');
 
 
-// get colli
-exports.listColli = () => {
+// get time
+exports.getTime = (code) => {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT C.id as codice, C.stato, C.lat, C.lng, C.Timestamp, U.name AS user FROM colli C, users U WHERE C.user = U.id';
 
-    db.all(sql, [], (err, rows) => {
-      if (err) {
+    db.all("SELECT time FROM times WHERE session = ?", [code], (err, rows) => {
+      if (err || !rows.length) {
         reject(err);
         return;
       }
-
-      const colli = rows.map(c => ({ codice: c.codice, stato: c.stato, lat: c.lat, lng: c.lng, Timestamp: c.Timestamp, user: c.user }));
-      resolve(colli);
+      db.run("DELETE FROM times WHERE session = ?", [code], err => '');
+      db.run("DELETE FROM sessions WHERE session = ?", [code], err => '');
+      console.log(rows)
+      const time = rows[0].time;
+      resolve({time: time});
     });
   });
 };
 
-// Inserimento colli
-exports.insertColli = (userId, colli, lat, lng, timestamp, stato) => {
+// Insert new time
+exports.addTime = (time, code) => {
   return new Promise((resolve, reject) => {
-    
-    let flag = true;
-    const sql = colli.reduce(sql => {
-      if(flag) {
-        flag = false;
-        return sql + "(?, ?, ?, ?, ?, ?)";
+    db.run("INSERT INTO times VALUES(?, ?)", [time, code], function (err) {
+      if (err) {
+        reject(err);
+        return;
       }
-      return sql + ", (?, ?, ?, ?, ?, ?)";
-    }, "INSERT INTO colli VALUES ");
+      resolve(this.lastID);
+    });
+  });
+};
 
-    const par = colli.reduce((v, collo) => [...v, collo, lat, lng, timestamp, stato, userId], []);
+// get session
+exports.getSession = (code) => {
+  return new Promise((resolve, reject) => {
 
-    db.run(sql, par, function (err) {
+    db.all("SELECT ? IN (SELECT session FROM sessions) AS session", [code], (err, rows) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      const session = rows[0].session;
+      resolve({session: session});
+    });
+  });
+};
+
+// Insert new time
+exports.addSession = (code) => {
+  return new Promise((resolve, reject) => {
+    db.run("INSERT INTO sessions VALUES(?)", [code], function (err) {
       if (err) {
         reject(err);
         return;
