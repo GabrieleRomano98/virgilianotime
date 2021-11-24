@@ -84,7 +84,7 @@ const Arrivo = props => {
             setErrMsg("È lento!");
             return;
         }
-        const res = false//await API.getSession(sessione);
+        const res = await API.getSession(sessione);
         if(res) setTrovata(true);
         else {
             setMessage(true);
