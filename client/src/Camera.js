@@ -3,7 +3,6 @@ import Canvas from "./Canvas";
 import { Button, Form, Spinner } from 'react-bootstrap';
 import {FrecciaSx } from './icons'
 import API from './API.js'
-import dayjs from "dayjs"
 
 const Arrivo = props => {
 
@@ -18,8 +17,6 @@ const Arrivo = props => {
     const [errMsg, setErrMsg] = React.useState('');
 
     let videoRef = React.createRef();
-
-    const milliseconds = day => 60*60*1000*day.get('hour') + 60*1000*day.get('minute') + 1000*day.get('second') + day.get('millisecond');
 
     const canvasDrow = async (ctx, frameCount) => {
         if(!ctx || !start) return;
@@ -41,12 +38,10 @@ const Arrivo = props => {
         catch (e){console.log(e)}
 
         if(prvScore > 10 && imgScore > 10 && (imgScore-prvScore > 5 || prvScore-imgScore > 5)){
-            let arrTime = dayjs();
-            arrTime = milliseconds(arrTime);
             clearInterval(intervalId);
             setIntervalId(false);
             const startTime = await API.getTime(Number(sessione));
-            props.setRisultato((2*Number(arrTime) - Number(startTime.time) - Number(milliseconds(dayjs())))/1000);
+            props.setRisultato(-1*Number(startTime.time)/1000);
             props.setShow('Risultato');
             prvScore = -1;
         }

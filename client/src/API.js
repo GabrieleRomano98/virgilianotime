@@ -11,15 +11,14 @@ async function getTime(code) {
   }
 }
 
-function addTime(time, code) {
+function addTime(code) {
 	// call: POST /api/time/:code
 	return new Promise((resolve, reject) => {
 		fetch(BASEURL + '/time/' + code, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({time: time})
+		}
 		}).then((response) => {
 			if (response.ok) {
 			resolve(null);

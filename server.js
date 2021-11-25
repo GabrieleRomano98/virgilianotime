@@ -24,7 +24,7 @@ app.get('/api/time/:code', async (req, res) => {
 // POST /api/time/:code
 app.post('/api/time/:code', [], async (req, res) => {
   try {
-    await myDao.addTime(req.body.time, req.params.code);
+    await myDao.addTime(req.params.code);
     res.status(201).end();
   } catch(err) {
     res.status(503).json({error: `Database error during the insert`});
