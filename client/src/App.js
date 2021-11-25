@@ -9,6 +9,9 @@ import { useState } from 'react';
 import API from './API';
 import Arrivo from './Camera.js';
 import logo from './logo.png'
+import sound from './startSound.mp3';
+
+const startSound = new Audio(sound);
 
 function App() {
 	const [show, setShow] = useState('Home');
@@ -49,7 +52,7 @@ function App() {
 
 				<Row className="justify-content-center m-5">
 					<div className="mb-4 text-box">Codice sessione da inserire all'arrivo: {code}</div>
-					{!partito ? <Button className="main-button general-button" onClick={() => {API.addTime(code); setPartito(true);}}>Start <GiPistolGun/></Button>
+					{!partito ? <Button className="main-button general-button" onClick={() => {startSound.play(); API.addTime(code); setPartito(true);}}>Start <GiPistolGun/></Button>
 					: <div className="mb-4 text-box">Partito! Il risultato sarà visibile all'arivo</div>}
 					<Button className="fixed-bottom general-button mb-4 ml-2" size="lg" onClick={() => {setShow('Home'); setPartito(false);}}>{FrecciaSx} Indietro</Button>
 				</Row>
