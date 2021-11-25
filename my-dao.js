@@ -18,7 +18,6 @@ exports.getTime = (code) => {
       }
       db.run("DELETE FROM times WHERE session = ?", [code], err => '');
       db.run("DELETE FROM sessions WHERE session = ?", [code], err => '');
-      console.log(rows)
       const time = rows[0].time;
       resolve({time: time});
     });

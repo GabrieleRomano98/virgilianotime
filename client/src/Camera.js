@@ -46,7 +46,7 @@ const Arrivo = props => {
             clearInterval(intervalId);
             setIntervalId(false);
             const startTime = await API.getTime(Number(sessione));
-            props.setRisultato((Number(arrTime) - Number(startTime.time))/1000);
+            props.setRisultato((2*Number(arrTime) - Number(startTime.time) - Number(milliseconds(dayjs())))/1000);
             props.setShow('Risultato');
             prvScore = -1;
         }
