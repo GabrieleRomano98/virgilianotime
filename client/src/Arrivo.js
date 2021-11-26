@@ -18,7 +18,7 @@ const Arrivo = props => {
 
     let videoRef = React.createRef();
 
-    const canvasDrow = async (ctx, frameCount) => {
+    const canvasDrow = async (ctx) => {
         if(!ctx || !start) return;
         try {
             ctx.globalCompositeOperation = "difference";
@@ -117,7 +117,7 @@ const Arrivo = props => {
                 <div className="mb-4 text-box">Posiziona il telefono sul traguardo</div>
             </>}
             <video autoPlay ref={videoRef} />
-            {intervalId && <div className="invisible-canvas"><Canvas draw={canvasDrow} classeName="invisible-canvas"/></div>}
+            {intervalId && <div className="invisible-canvas"><Canvas running={intervalId} draw={canvasDrow} classeName="invisible-canvas"/></div>}
             <Button className="fixed-bottom general-button mb-4 ml-2" size="lg" onClick={indietro}>{FrecciaSx} Indietro</Button>
         </>
     );
