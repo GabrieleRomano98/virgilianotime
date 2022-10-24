@@ -1,4 +1,4 @@
-# RTOS_example
+# VirgilianoTime
 
  The goal of this web application is to time with high accuracy the time taken by a person to run a certain distance.
 
