@@ -7,6 +7,8 @@
  The passage of the runner is detected with a motion detection system, implemented using the camera of the device. The application constantly compares the frames in the stream arriving from the camera. The system calculates the average value of the central column of pixels of each image and compares it with the previous one. When the difference is greater than a certain threshold, a movement is detected.
 
  The system works on the assumption that the vriation of latency for the connection to the server from the two devices does not exceed a range of few milliseconds
+ 
+ The website is only meant for mobile devices, the front-end is developed with React-Bootstrap and the back-end is implemented in JS with a SQLite database
 
 This application has been deployed on a Heroku server and can be tested at the following link: [VirgilianoTime](https://fathomless-plains-73904.herokuapp.com/)
 
